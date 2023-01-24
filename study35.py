@@ -1,3 +1,3 @@
-my_list = ["가", "나", "다", "라"]
-for x in range(len(my_list) - 1):
-    print(my_list[x], my_list[x + 1])
+my_list = ["가", "나", "다", "라", "마"]
+for x in range(2, len(my_list)):
+    print(my_list[x - 2], my_list[x - 1], my_list[x])

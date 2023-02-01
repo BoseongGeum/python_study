@@ -31,7 +31,6 @@ class Account:
         print("계좌번호:", self.num)
         print("잔고:", f"{self.bal:,}원")
 
-
     def get_account_num(cls):
         print(cls.account_count)
 
@@ -42,33 +41,34 @@ class Account:
             if self.deposit_count != 0 and self.deposit_count % 5 == 0:
                 self.bal = int(self.bal*1.01)
         self.deposit_log.append(f"{money:,}원")
-            
 
     def withdraw(self, money):
         if money < self.bal:
             self.bal -= money
         self.withdraw_log.append(f"{money:,}원")
 
-
     def deposit_history(self):
+        print("입금내역")
         for x in self.deposit_log:
-            print(self.deposit_log)
+            print(x)
 
     def withdraw_history(self):
-        print(self.withdraw_log)
+        print("출금내역")
+        for x in self.withdraw_log:
+            print(x)
     
 
 geum = Account("금보성", 1000000)
-geum.deposit(100000)
-geum.deposit(100000)
-geum.deposit(100000)
-geum.deposit(100000)
+geum.deposit(90000)
+geum.deposit(80000)
+geum.deposit(70000)
+geum.deposit(60000)
 
 geum.withdraw(50000)
-geum.withdraw(50000)
-geum.withdraw(50000)
-geum.withdraw(50000)
-geum.withdraw(50000)
+geum.withdraw(40000)
+geum.withdraw(30000)
+geum.withdraw(20000)
+geum.withdraw(10000)
 
 geum.deposit_history()
 geum.withdraw_history()

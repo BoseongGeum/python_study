@@ -1,0 +1,5 @@
+a = list(input() for _ in range(9))
+b = list(map(int, a))
+c = sorted(b)
+print(c[-1])
+print(b.index(c[-1]) + 1)

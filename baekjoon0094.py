@@ -1,12 +1,11 @@
+import sys
+
 n = input()
-l1 = list(input().split())
+s1 = set(sys.stdin.readline().rstrip().split())
 m = int(input())
-l2 = list(input().split())
-l = [0]*m
+l2 = list(sys.stdin.readline().rstrip().split())
 
-    if  in l1:
-        l.append(1)
-    else:
-        l.append(0)
+l = [1 if x in s1 else 0
+     for x in l2]
 
-print(*l, sep=' ')
+print(*l, sep= ' ')

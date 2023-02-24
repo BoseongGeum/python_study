@@ -11,7 +11,9 @@ for x in range(t):
         cx,cy,r = map(int, input().split())
         d1 = ((cx-x1)**2+(cy-y1)**2)**(1/2)
         d2 = ((cx-x2)**2+(cy-y2)**2)**(1/2)
-        d3 = ((x1-x2)**2+(y1-y2)**2)**(1/2)
-        if d3 > r > d1 or d3 > r > d2:
-            c += 1
+        if r > d1 or r > d2 :
+            if r > d1 and r > d2:
+                pass
+            else:
+                c += 1
     print(c)

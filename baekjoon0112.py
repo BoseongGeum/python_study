@@ -2,25 +2,28 @@ import sys
 input = sys.stdin.readline
 
 n,m = map(int, input().split())
-c = 0
+c1 = 0
+c2 = 0
 l = [m, n-m]
 
 i = 1
 while True:
-    if n < 5**i:
+    if n < 2**i:
         break
-    c += n // 5**i
+    c1 += n // 5**i
+    c2 += n // 2**i
     i += 1
 
 for x in l:
     i = 1
     while True:
-        if x < 5**i:
+        if x < 2**i:
             break
-        c -= x // 5**i
+        c1 -= x // 5**i
+        c2 -= x // 2**i
         i += 1
-if n == 5:
-    if m == 1 or 4:
-        print(0)
+
+if c1 > c2:
+    print(c2)
 else:
-    print(c)
+    print(c1)

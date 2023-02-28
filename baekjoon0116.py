@@ -1,5 +1,6 @@
 import sys
 input = sys.stdin.readline
+sys.setrecursionlimit(10000) 
 
 n,m = map(int, input().split())
 visited = [False for _ in range(n+1)]
@@ -7,10 +8,11 @@ l = []
 
 def back():
     if len(l) == m:
-        print(*l)
+        if l == sorted(l):
+            print(*l)
         return
     for x in range(1, n+1):
-        for _ in range(x):
+        if visited[x] == False:
             visited[x] = True
         l.append(x)
         back()

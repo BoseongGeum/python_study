@@ -3,19 +3,17 @@ input = sys.stdin.readline
 
 n = int(input())
 cost = []
+costsumlist = []
 gap = 0
 for _ in range(n):
     l = list(map(int, input().split()))
     cost.append(l)
-cost_init = cost
 
-for y in sorted(cost[0]):
-    costsum = y
-    color = cost[0].index(y)
-    for x in cost[1:]:
-        if color == x.index(min(x)):
-            x[x.index(min(x))] = 1001
-        costsum += min(x)
-        color = x.index(min(x))
-        x[x.index(min(x))] = min(cost_init(x))
-    print(costsum)
+for a in range(1, n):
+    for x in range(3):
+        if min(cost[a-1]) != cost[a-1][x]:
+            cost[a][x] += min(cost[a-1])
+        else:
+            cost[a][x] += sorted(cost[a-1])[1]
+            
+print(min(cost[n-1]))

@@ -1,10 +1,11 @@
 import sys
 input = sys.stdin.readline
 
-n = int(input())
-l = []
-for _ in range(n):
-    l.append(int(input()))
+n, m = map(int, input().split())
+l = [0]*(n+1)
 
-for x in range(n):
-    
+for _ in range(m):
+    a, b, c = map(int, input().split())
+    l[a:b+1] = [c]*(b-a+1)
+del l[0]
+print(*l)

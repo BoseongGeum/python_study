@@ -4,23 +4,25 @@ input = sys.stdin.readline
 n = int(input())
 l = [list(map(int, input().split())) for _ in range(n)]
 
-blue = white = 0
-def paper(x, y, n):
-    global blue, white
-    color = l[x][y]
-    for a in range(x, x+n):
-        for b in range(y, y+n):
-            if l[a][b] != color:
-                paper(x, y, n//2)
-                paper(x+n//2, y, n//2)
-                paper(x, y+n//2, n//2)
-                paper(x+n//2, y+n, n//2)
-                
+white = blue = 0
+
+def paper(a, b, n):
+    global white, blue
+    color = l[a][b]
+    
+    for x in range(a, a + n):
+        for y in range(b, b + n):
+            if l[x][y] != color:
+                paper(a, b, n//2)
+                paper(a + n//2, b, n//2)
+                paper(a, b + n//2, n//2)
+                paper(a + n//2, b + n//2, n//2)
+                return
+
     if color == 1:
         blue += 1
     else:
         white += 1
 
-paper(0,0,n)
-print(white)
-print(blue)
+paper(0, 0, n)
+print(white, blue, sep='\n')

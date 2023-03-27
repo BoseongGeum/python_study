@@ -1,41 +1,32 @@
 n = int(input())
 l = list(map(int, input().split()))
 
-def mergesort(l):
-    
-    def sort(s, e):
-        if e - s < 2:
+def quicksort(start, end):
+
+    def sort(start, end):
+        if end <= start:
             return
 
-        mid = (s + e) // 2
-        sort(s, mid)
-        sort(mid, e)
+        mid = partition(start, end)
+        sort(start, mid - 1)
+        sort(mid, end)
         
-        return merge(s, mid, e)
+    def partition(start, end):
+        pivot = l[(start + end) // 2]
 
-    def merge(s, mid, e):
-        g, h = s, mid
-        a = []
-        
-        while g < mid and h < e:
-            if l[g] < l[h]:
-                a.append(l[g])
-                g += 1
-            else:
-                a.append(l[h])
-                h += 1
-                
-        while g < mid:
-            a.append(l[g])
-            g += 1
-        while h < e:
-            a.append(l[h])
-            h += 1
+        while start <= end:
+            while l[start] < pivot:
+                start += 1
+            while l[end] > pivot:
+                end -= 1
+            if start <= end:
+                l[start], l[end] = l[end], l[start]
+                start += 1
+                end -= 1
 
-        for i in range(s, e):
-            l[i] = a[i - s]
-        return l
-    
-    return sort(0, len(l))
+        return start
 
-print(mergesort(l))
+    return sort(start, end)
+
+quicksort(0, n - 1)
+print(l)

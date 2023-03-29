@@ -1,21 +1,40 @@
+from numpy import * 
+
 n = int(input())
+a = [list(map(int, input().split())) for _ in range(n)]
+b = [list(map(int, input().split())) for _ in range(n)]
+c = []
 
-c = [[0] * n] * n
+def strassen(n, a, b, c):
 
-def strassen(i, j, n):
+    a11 = array([[a[x][y] for y in range(n//2)] for x in range(n//2)])
+    a12 = array([[a[x][y] for y in range(n//2, n)] for x in range(n//2)])
+    a21 = array([[a[x][y] for y in range(n//2)] for x in range(n//2, n)])
+    a22 = array([[a[x][y] for y in range(n//2, n)] for x in range(n//2, n)])
+    
+    b11 = array([[b[x][y] for y in range(n//2)] for x in range(n//2)])
+    b12 = array([[b[x][y] for y in range(n//2, n)] for x in range(n//2)])
+    b21 = array([[b[x][y] for y in range(n//2)] for x in range(n//2, n)])
+    b22 = array([[b[x][y] for y in range(n//2, n)] for x in range(n//2, n)])
+    
+    if n <= 2:
+        c = array(a) @ array(b)
 
-    if n == 2:
-        for i in range(i, i + n):
-            for j in range(j, j + n):
-                for k in range(n):
-                    c[i][j] += a[i][k] * b[k][j]
+    else:
+        m1 = m2 = m3 = m4 = m5 = m6 = m7 = array([])
+        
+        m1 = strassen(n//2, (a11 + a22), b11 + b22, m1)
+        m2 = strassen(n//2, (a21 + a22), b11, m2)
+        m3 = strassen(n//2, a11, (b12 - b22), m3)
+        m4 = strassen(n//2, a22, (b21 - b11), m4)
+        m5 = strassen(n//2, (a11 + a12), b22, m5)
+        m6 = strassen(n//2, (a21 - a11), (b11 + b12), m6)
+        m7 = strassen(n//2, (a12 - a22), (b21 + b22), m7)
 
-    while n != 2:
-        stassen(i, j + n // 2, n // 2)
-        stassen(i, j, n // 2)
-        stassen(i + n // 2 , j + n // 2, n // 2)
-        stassen(i + n // 2, j, n // 2)
+        c = vstack([hstack([m1 + m4 - m5 + m7, m3 + m5]), hstack([m2 + m4, m1 + m3 - m2 + m6])])
 
-    m1 = (a[i][j] + a[i+1][j+1]) * (b[i][j] + b[i+1][j+1])
+    return c
 
+print(array(a) + array(b))
+c = strassen(n, a, b, c)
 print(c)

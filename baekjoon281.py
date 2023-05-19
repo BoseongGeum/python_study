@@ -1,7 +1,6 @@
 import sys
 input = sys.stdin.readline
 
-t = int(input())
-for _ in range(t):
+for _ in range(3):
     n = int(input())
     print(sum(list(map(int, input().split()))))

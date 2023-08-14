@@ -1,0 +1,13 @@
+import sys
+input = sys.stdin.readline
+
+n = int(input())
+l = 1
+for _ in range(n):
+    a, b = map(int, input().split())
+    if a == l:
+        l = b
+    elif b == l:
+        l = a
+    
+print(l)

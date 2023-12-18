@@ -6,10 +6,8 @@ n = int(input())
 count = 0
 for _ in range(n):
     c = input().rstrip()
-    exist = False
-    for a in s:
-        if not a in c:
-            exist = True
-            break
-    if exist:
+    c = c * 2
+    if s in c:
         count += 1
+
+print(count)

@@ -1,13 +1,12 @@
 import sys
 input = sys.stdin.readline
 
-s = input().rstrip()
-r = ''
-i = 0
-while i < len(s):
-    r += s[i]
-    if s[i] in ['a','e','i','o','u']:
-        i += 2
-    i += 1
-
-print(r)
+t = int(input())
+for _ in range(t):
+    a = input().rstrip()
+    b = input().rstrip()
+    r = 0
+    for i in range(len(a)):
+        if a[i] != b[i]:
+            r += 1
+    print(f'Hamming distance is {r}.')

@@ -1,32 +1,25 @@
 from collections import deque
 
 def solution(maps):
-    n = len(maps[0])
-    m = len(maps)
-    queue = deque([[0,0,1]])
-    visited = [[False for _ in range(n)] for _ in range(m)]
+    row = len(maps)
+    col = len(maps[0])
+    queue = deque([[0,0]])
+    directions = [[0,1], [1,0], [0,-1], [-1,0]]
+    
     
     while queue:
-        posx, posy, dis = queue.pop()
-        
-        if maps[posx][posy] != 1 or visited[posx][posy] == True:
-            continue
-        
-        if posx+1 < n:
-            queue.appendleft([posx+1, posy, dis+1])
-        if posy+1 < m:
-            queue.appendleft([posx, posy+1, dis+1])
-        if 0 < posx:
-            queue.appendleft([posx-1, posy, dis+1])
-        if 0 < posy:
-            queue.appendleft([posx, posy-1, dis+1])
-        
-        maps[posx][posy] = dis
-        visited[posx][posy] = True
+        print(maps)
+        posx, posy = queue.pop()
+        dis = maps[posx][posy]
+
+        for dx, dy in directions:
+            nx, ny = posx + dx, posy + dy
             
-    if maps[n-1][m-1] == 1:
-        return -1
+            if 0 <= nx < row and 0 <= ny < col and maps[nx][ny] == 1:
+                queue.appendleft([nx, ny])
+                maps[nx][ny] = dis + 1
 
-    return maps[n-1][m-1]
+            if nx == row - 1 and ny == col - 1:
+                return maps[nx][ny]
 
-print(solution([[1, 1, 1, 1, 1], [1, 0, 0, 0, 1], [1, 0, 0, 0, 1], [1, 1, 1, 1, 1], [1, 1, 1, 1, 1]]))
+    return -1

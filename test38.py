@@ -3,18 +3,18 @@ from collections import defaultdict
 def solution(tickets):
 
     graph = defaultdict(list)
-    for a,b in tickets:
+    for a, b in tickets:
         graph[a].append(b)
-
+        
     for key in graph.keys():
         graph[key].sort(reverse=True)
 
     route = []
 
-    def dfs(node):
-        while graph[node]:
-            dfs(graph[node].pop())
-        route.append(node)
+    def dfs(city):
+        while graph[city]:
+            dfs(graph[city].pop())
+        route.append(city)
 
     dfs("ICN")
     return route[::-1]

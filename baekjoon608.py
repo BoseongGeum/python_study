@@ -1,43 +1,51 @@
-class TrieNode:
+class Node:
     def __init__(self):
         self.children = {}
-        self.is_end_of_number = False
+        self.is_end_of_numbers = False
 
 class Trie:
     def __init__(self):
-        self.root = TrieNode()
+        self.root = Node()
 
-    def insert(self, number):
-        current = self.root
-        for digit in number:
-            if digit not in current.children:
-                current.children[digit] = TrieNode()
-            current = current.children[digit]
-            if current.is_end_of_number:
+    def insert(self, numbers):
+        current_node = self.root
+        
+        for number in numbers:
+            if number not in current_node.children:
+                current_node.children[number] = Node()
+
+            current_node = current_node.children[number]
+
+            if current_node.is_end_of_numbers:
                 return False
-        current.is_end_of_number = True
-        return not current.children
 
-def is_consistent(phone_numbers):
+        current_node.is_end_of_numbers = True
+
+        return not current_node.children
+
+def is_consistent(all_numbers):
     trie = Trie()
-    for number in phone_numbers:
-        if not trie.insert(number):
+
+    for numbers in all_numbers:
+        if not trie.insert(numbers):
             return False
+    
     return True
-
-# 입력 처리 부분
+    
 import sys
-input = sys.stdin.read
-data = input().split()
+input = sys.stdin.readline
 
-t = int(data[0])
-index = 1
+t = int(input())
+
 for _ in range(t):
-    n = int(data[index])
-    phone_numbers = data[index + 1:index + 1 + n]
-    index += 1 + n
+    
+    n = int(input())
+    all_numbers = []
+    
+    for _ in range(n):
+        all_numbers.append(input().rstrip())
 
-    if is_consistent(phone_numbers):
-        print("YES")
+    if is_consistent(all_numbers):
+        print('YES')
     else:
-        print("NO")
+        print('NO')

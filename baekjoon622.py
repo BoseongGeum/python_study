@@ -1,7 +1,6 @@
 import sys
 input = sys.stdin.readline
 
-
 count = {i:0 for i in range(10)}
 digit = 0
 

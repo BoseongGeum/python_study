@@ -2,7 +2,6 @@ import sys
 input = sys.stdin.readline
 from string import ascii_lowercase
 
-
 n = int(input())
 
 for i in range(1, n+1):
